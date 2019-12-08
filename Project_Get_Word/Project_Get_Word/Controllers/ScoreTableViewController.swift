@@ -20,6 +20,7 @@ class ScoreTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.reusedId)
+        tableView.register(ScoreTableViewCellLabels.self, forCellReuseIdentifier: ScoreTableViewCellLabels.reusedId)
         navigationController?.isNavigationBarHidden = false
         navigationItem.rightBarButtonItem = deleteBarButtonItem
         navigationItem.title = "Таблица рекордов"

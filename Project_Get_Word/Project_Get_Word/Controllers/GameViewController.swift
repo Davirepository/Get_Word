@@ -18,12 +18,6 @@ class GameViewController: UIViewController {
     var correctWordLabel: UILabel!
     var homeButton: UIButton!
     
-    var countLiveChange: Int? {
-        didSet {
-            
-        }
-    }
-    
     /// если раннее выигрывали, то продолжаем счет 
     var scoreAfterWin = 0
     var newGame: Game!
@@ -47,11 +41,9 @@ class GameViewController: UIViewController {
             newRound()
         }
     }
-
-    let itemsArray: Array<String> = {
-        let array: Array<String> = ["А","Б","В","Г","Д","Е","Ё","Ж","З","И","Й","К","Л","М","Н","О","П","Р","С","Т","У","Ф","Х","Ц","Ч","Ш","Щ","Ъ"," ","Ы","Ь","Э","Ю","Я"," "]
-        return array
-    }()
+    
+    /// алфавит клавиатуры
+    let keyboardLetters: Array<String> = Keyboard.all
 
     override func viewDidLoad() {
         super.viewDidLoad()

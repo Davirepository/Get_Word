@@ -21,13 +21,20 @@ extension ScoreTableViewController {
             cell.mainImage.image = UIImage(named: "goldcup")
             configure(cell, with: indexPath)
             return cell
-        } else if indexPath.row > 0 && indexPath.row < 3 {
+        } else if indexPath.row == 1 {
             cell.mainImage.image = UIImage(named: "silvercup")
             configure(cell, with: indexPath)
             return cell
+        } else if indexPath.row == 2 {
+            cell.mainImage.image = UIImage(named: "milk")
+            configure(cell, with: indexPath)
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellLabels", for: indexPath) as! ScoreTableViewCellLabels
+            cell.number.text = "\(indexPath.row + 1)."
+            cell.titleText.text = "\(allScores[indexPath.row].score)"
+            cell.isUserInteractionEnabled = false
+            return cell
         }
-        cell.mainImage.image = UIImage(named: "milk")
-        configure(cell, with: indexPath)
-        return cell
     }
 }

@@ -24,13 +24,13 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1);
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.black.cgColor
-        cell.textLabel.text = itemsArray[indexPath.item + indexPath.section * 7]
+        cell.textLabel.text = keyboardLetters[indexPath.item + indexPath.section * 7]
         cell.isUserInteractionEnabled = true
         return cell
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return lround(Double(itemsArray.count) / Double(numberOfCharsInRow))
+        return lround(Double(keyboardLetters.count) / Double(numberOfCharsInRow))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -40,7 +40,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let letterString = itemsArray[indexPath.item + indexPath.section * 7]
+        let letterString = keyboardLetters[indexPath.item + indexPath.section * 7]
         let letter = Character(letterString.lowercased())
         let cells = collectionView.cellForItem(at: indexPath)
         cells?.alpha = 0.5

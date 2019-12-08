@@ -57,5 +57,7 @@ final class TableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        mainImage.image = nil
+        titleText.text = nil
     }
 }
