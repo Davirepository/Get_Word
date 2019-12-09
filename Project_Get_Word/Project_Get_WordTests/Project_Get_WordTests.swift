@@ -29,6 +29,7 @@ class Project_Get_WordTests: XCTestCase {
         networkService = nil
         mockSession = nil
         category = nil
+        networkService = nil
         super.tearDown()
     }
     
@@ -92,6 +93,4 @@ class Project_Get_WordTests: XCTestCase {
         //assets
         XCTAssertNotNil(responseData)
     }
-    
-
 }

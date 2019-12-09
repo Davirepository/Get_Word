@@ -13,7 +13,7 @@ final class HeartStack: UIStackView {
     // когда уменьшаются жизни, тогда обновляем имидж с жизнями
     var countLive = 0 {
         didSet {
-            updateButtonSelectionState()
+            updateImageState()
         }
     }
     
@@ -59,11 +59,10 @@ final class HeartStack: UIStackView {
             // Add the new image in the heart image array
             heartImages.append(image)
         }
-//        updateButtonSelectionState() // для отображения рейтинга по умолчания в интерфейсбилдере(в данном случае он ни на что не влияет)
     }
     
     /// метод удаления сердец
-    private func updateButtonSelectionState() {
+    private func updateImageState() {
         let bundle = Bundle(for: type(of: self))
         let filledHeart = UIImage(named: "heart 0", in: bundle, compatibleWith: self.traitCollection) // место хранения картинки
         let emptyHeart = UIImage(named: "heart", in: bundle, compatibleWith: self.traitCollection)
