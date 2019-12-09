@@ -15,7 +15,7 @@ class Project_Get_WordTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        game = Game(word: "Яблоко", incorrectMovesRemaining: 5, guestLetters: [])
+        game = Game(word: "Яблоко", incorrectMovesRemaining: 5, guestLetters: [], addedletter: 2)
     }
 
     override func tearDown() {
@@ -41,6 +41,15 @@ class Project_Get_WordTests: XCTestCase {
         game.playerGuessed(letter: letter)
         //assert
         XCTAssertEqual(guestLetters, game.guestLetters.count, "letter was not added into guestLetters array")
+    }
+    
+    func testThatChecksThatFreeLetterWasUssed() {
+        // arrange
+        let freeLetter = 1
+        // act
+        game.freeLetters()
+        //assert
+        XCTAssertEqual(freeLetter, game.addedletter, "freeLetters was not used")
     }
 
 }
