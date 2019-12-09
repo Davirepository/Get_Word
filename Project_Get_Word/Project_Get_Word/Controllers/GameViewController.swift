@@ -173,7 +173,7 @@ class GameViewController: UIViewController {
         let randomChar: Character = wordsArray[letter]
         let indexPathLetter = keyboardLetters.firstIndex(of: String(randomChar.uppercased()))
         let section = indexPathLetter! / 7
-        let item = indexPathLetter! / (section + 1)
+        let item = indexPathLetter! - 7 * section
         newGame.playerGuessed(letter: randomChar)
         collectionView.cellForItem(at: [section, item])?.backgroundColor = .green
         collectionView.cellForItem(at: [section, item])?.alpha = 0.5
