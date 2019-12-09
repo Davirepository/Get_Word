@@ -15,6 +15,8 @@ struct Game {
     var incorrectMovesRemaining: Int
     /// список нажатых букв
     var guestLetters: [Character]
+    /// колличество подсказок
+    var addedletter: Int
     
     /// отображает угадываемые буквы или прочерки(форматирует входящее слово взависимости от содержания guestLetters)
     var formattedWord: String {
@@ -39,5 +41,9 @@ struct Game {
                 incorrectMovesRemaining -= 1
             }
             print("add")
+    }
+    mutating func freeLetters() {
+        addedletter -= 1
+        print(addedletter)
     }
 }

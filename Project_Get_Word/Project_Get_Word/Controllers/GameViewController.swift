@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
     var scoreLabel: UILabel!
     var correctWordLabel: UILabel!
     var homeButton: UIButton!
+    /// кнопка с подсказками
+    var freeLetter: UIButton!
     
     /// если раннее выигрывали, то продолжаем счет 
     var scoreAfterWin = 0
@@ -26,6 +28,8 @@ class GameViewController: UIViewController {
     /// выбранная категория
     var category = ""
     let numberOfCharsInRow = 7
+    /// кол-во подсказок
+    var numberOfFreeLetters = 0
     private let coreDataService = CoreDataService()
     private let networkService = NetworkService()
     
@@ -80,8 +84,15 @@ class GameViewController: UIViewController {
         if !listOfWords.isEmpty {
             let randomIndex = Int.random(in: 0..<listOfWords.count)
             let newWord = listOfWords.remove(at: randomIndex)
+            freeLetter.isEnabled = true
+            freeLetter.alpha = 1
+            if newWord.count < 5 {
+                numberOfFreeLetters = 1
+            } else {
+                numberOfFreeLetters = 2
+            }
         // создаем новую игру/раунд
-            newGame = Game(word: newWord.lowercased(), incorrectMovesRemaining: incorrectMovesAllowed, guestLetters: [])
+            newGame = Game(word: newWord.lowercased(), incorrectMovesRemaining: incorrectMovesAllowed, guestLetters: [], addedletter: numberOfFreeLetters)
             liveButtonsStackView.countLive = incorrectMovesAllowed
         // обновляем состояние кнопок
         collectionView.reloadData()
@@ -110,6 +121,12 @@ class GameViewController: UIViewController {
         
         // update score
         scoreLabel.text = "Счет: \(scoreAfterWin)"
+        
+        // update button with free letters
+        if newGame.addedletter == 0 {
+            freeLetter.isEnabled = false
+            freeLetter.alpha = 0.5
+        }
     }
     
     /// проверяем окончание игры
@@ -143,5 +160,25 @@ class GameViewController: UIViewController {
         let mainVC = MainViewController()
         coreDataService.saveInStorage(data: Int16(scoreAfterWin))
         navigation.pushViewController(mainVC, animated: false)
+    }
+    
+    @objc func freeLetterButtonTapped() {
+        var wordsArray: Array<Character> = []
+        for word in newGame.word {
+            if !newGame.guestLetters.contains(word) {
+                wordsArray.append(word)
+            }
+        }
+        let letter = Int.random(in: 0..<wordsArray.count)
+        let randomChar: Character = wordsArray[letter]
+        let indexPathLetter = keyboardLetters.firstIndex(of: String(randomChar.uppercased()))
+        let section = indexPathLetter! / 7
+        let item = indexPathLetter! / (section + 1)
+        newGame.playerGuessed(letter: randomChar)
+        collectionView.cellForItem(at: [section, item])?.backgroundColor = .green
+        collectionView.cellForItem(at: [section, item])?.alpha = 0.5
+        collectionView.cellForItem(at: [section, item])?.isUserInteractionEnabled = false
+        newGame.freeLetters()
+        updateGameState()
     }
 }

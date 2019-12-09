@@ -58,7 +58,6 @@ extension GameViewController {
         }()
         homeButton = {
            let button = UIButton()
-//            button.backgroundColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
             button.backgroundColor = #colorLiteral(red: 0.7840276361, green: 0.9304812551, blue: 0.9022602439, alpha: 1)
             button.setImage(UIImage(named: "home1"), for: .normal)
             button.layer.cornerRadius = 5
@@ -68,6 +67,22 @@ extension GameViewController {
             button.layer.shadowOpacity = 0.3
             button.layer.shadowOffset = CGSize(width: 2, height: 3)
             button.addTarget(self, action: #selector(homeButtonTapped), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
+        
+        freeLetter = {
+            let button = UIButton()
+            button.backgroundColor = #colorLiteral(red: 0.7840276361, green: 0.9304812551, blue: 0.9022602439, alpha: 1)
+            button.setTitle("+A", for: .normal)
+            button.setTitleColor(.black, for: .normal)
+            button.layer.cornerRadius = 5
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor.black.cgColor
+            button.layer.shadowRadius = 4
+            button.layer.shadowOpacity = 0.3
+            button.layer.shadowOffset = CGSize(width: 2, height: 3)
+            button.addTarget(self, action: #selector(freeLetterButtonTapped), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
             return button
         }()
@@ -93,6 +108,7 @@ extension GameViewController {
         view.addSubview(liveButtonsStackView)
         view.addSubview(categoryLabel)
         view.addSubview(homeButton)
+        view.addSubview(freeLetter)
         
         let freeSpace = (view.frame.height - 240) / 2
         
@@ -125,5 +141,10 @@ extension GameViewController {
         homeButton.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -5).isActive = true
         homeButton.widthAnchor.constraint(equalToConstant: 45).isActive = true
         homeButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        
+        freeLetter.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        freeLetter.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: -5).isActive = true
+        freeLetter.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        freeLetter.heightAnchor.constraint(equalToConstant: 35).isActive = true
     }
 }
