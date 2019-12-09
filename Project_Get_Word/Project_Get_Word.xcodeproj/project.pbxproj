@@ -41,6 +41,7 @@
 		634F7523239EC3F300F386C5 /* GameVCDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5ADDA23956661003D39C3 /* GameVCDataSource.swift */; };
 		634F7524239EC3F700F386C5 /* ScoreTVCDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331F1AD239ADB8D00E57E04 /* ScoreTVCDatasource.swift */; };
 		634F7525239EC3FB00F386C5 /* ResultVCUIConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6331F1B0239B156A00E57E04 /* ResultVCUIConstraints.swift */; };
+		634F7769239EC99F00F386C5 /* MockNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634F7768239EC99F00F386C5 /* MockNetwork.swift */; };
 		637F82A0239D36010051BEBC /* ScoreTableViewCellLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F829F239D36010051BEBC /* ScoreTableViewCellLabels.swift */; };
 		637F872D239D95F50051BEBC /* Project_Get_WordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F872C239D95F50051BEBC /* Project_Get_WordTests.swift */; };
 		639A6C03239D310900D60A89 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639A6C02239D310900D60A89 /* Keyboard.swift */; };
@@ -83,6 +84,7 @@
 		6331F1AB239AD50900E57E04 /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		6331F1AD239ADB8D00E57E04 /* ScoreTVCDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTVCDatasource.swift; sourceTree = "<group>"; };
 		6331F1B0239B156A00E57E04 /* ResultVCUIConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultVCUIConstraints.swift; sourceTree = "<group>"; };
+		634F7768239EC99F00F386C5 /* MockNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetwork.swift; sourceTree = "<group>"; };
 		637F829F239D36010051BEBC /* ScoreTableViewCellLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCellLabels.swift; sourceTree = "<group>"; };
 		637F872A239D95F50051BEBC /* Project_Get_WordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Project_Get_WordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		637F872C239D95F50051BEBC /* Project_Get_WordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project_Get_WordTests.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				637F872C239D95F50051BEBC /* Project_Get_WordTests.swift */,
+				634F7768239EC99F00F386C5 /* MockNetwork.swift */,
 				637F872E239D95F50051BEBC /* Info.plist */,
 			);
 			path = Project_Get_WordTests;
@@ -417,6 +420,7 @@
 				634F7520239EC3E600F386C5 /* Model.xcdatamodeld in Sources */,
 				634F7525239EC3FB00F386C5 /* ResultVCUIConstraints.swift in Sources */,
 				634F7511239EC3C400F386C5 /* Score.swift in Sources */,
+				634F7769239EC99F00F386C5 /* MockNetwork.swift in Sources */,
 				634F751D239EC3DF00F386C5 /* CoreDataService.swift in Sources */,
 				634F750D239EC3C400F386C5 /* Category.swift in Sources */,
 			);

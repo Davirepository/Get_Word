@@ -10,11 +10,15 @@ import Foundation
 
 class NetworkService {
     private let baseurl = URL(string: "http://localhost:8080/")!
+    private var session: URLSession
+    init(withSession session: URLSession = URLSession.shared) {
+        self.session = session
+    }
     
     func loadCategories(completion: @escaping ([Category]?) -> Void) {
         let url = baseurl.appendingPathComponent("categories")
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        session.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 print(#line, #function, "Cant get data from \(url.absoluteString)")
                 completion(nil)
@@ -34,7 +38,7 @@ class NetworkService {
     func loadWords(for category: Category, completion: @escaping ([CategoryWord]?) -> Void) {
         let url = baseurl.appendingPathComponent("words").appendingPathComponent("\(category.id)")
         
-        URLSession.shared.dataTask(with: url) { data,response,error in
+        session.dataTask(with: url) { data,response,error in
             guard let data = data else {
                 print(#line, #function, "Cant get data from \(url.absoluteString)")
                 completion(nil)

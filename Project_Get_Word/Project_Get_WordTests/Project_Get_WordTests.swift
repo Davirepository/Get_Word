@@ -12,14 +12,23 @@ import XCTest
 class Project_Get_WordTests: XCTestCase {
     
     var game: Game!
+    var networkService: NetworkService!
+    var mockSession: MockURLSession!
+    var category: Category!
 
     override func setUp() {
         super.setUp()
         game = Game(word: "Яблоко", incorrectMovesRemaining: 5, guestLetters: [], addedletter: 2)
+        mockSession = MockURLSession()
+        networkService = NetworkService(withSession: mockSession)
+        category = Category(id: 1, name: "Имя")
     }
 
     override func tearDown() {
         game = nil
+        networkService = nil
+        mockSession = nil
+        category = nil
         super.tearDown()
     }
     
@@ -51,5 +60,38 @@ class Project_Get_WordTests: XCTestCase {
         //assert
         XCTAssertEqual(freeLetter, game.addedletter, "freeLetters was not used")
     }
+    
+    func testThatCheckLoadedCategoriesIsNotNill() {
+        // arrange
+        let promise = expectation(description: "Completion get data")
+        let data = Data(base64Encoded: "267454238428")
+        mockSession.data = data
+        var responseData: Data?
+        //act
+        networkService.loadCategories { (category) in
+            responseData = data
+            promise.fulfill()
+        }
+        waitForExpectations(timeout: 5.0, handler: nil)
+        //assets
+        XCTAssertNotNil(responseData)
+    }
+    
+    func testThatCheckLoadedWordsIsNotNill() {
+        // arrange
+        let promise = expectation(description: "Completion get data")
+        let data = Data(base64Encoded: "267454238428")
+        mockSession.data = data
+        var responseData: Data?
+        //act
+        networkService.loadWords(for: category) { (categoryWord) in
+            responseData = data
+            promise.fulfill()
+        }
+        waitForExpectations(timeout: 5.0, handler: nil)
+        //assets
+        XCTAssertNotNil(responseData)
+    }
+    
 
 }
