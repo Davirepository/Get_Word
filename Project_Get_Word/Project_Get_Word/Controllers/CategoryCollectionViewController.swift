@@ -8,8 +8,6 @@
 
 import UIKit
 
-//private let reuseIdentifier = "Cell"
-
 class CategoryCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private let networkService = NetworkService()
@@ -32,13 +30,7 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDataSo
         collectionFlowLayout.scrollDirection = .vertical
         collectionView = UICollectionView.init(frame: view.frame, collectionViewLayout: collectionFlowLayout)
         self.collectionView!.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.reusedId)
-        networkService.loadCategories { (categories) in
-            guard let categories = categories else {
-                self.categories = self.defaultCategory
-                return
-            }
-            self.categories = categories
-        }
+        loadCategoriesDate()
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
@@ -51,6 +43,16 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDataSo
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+    }
+    
+    func loadCategoriesDate() {
+        networkService.loadCategories { (categories) in
+            guard let categories = categories else {
+                self.categories = self.defaultCategory
+                return
+            }
+            self.categories = categories
+        }
     }
 
     // MARK: UICollectionViewDataSource

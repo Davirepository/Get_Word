@@ -58,25 +58,29 @@ class GameViewController: UIViewController {
         categoryLabel.text = category
         
         if categoryWords.id != -1 {
-            networkService.loadWords(for: categoryWords) { wordsFromApi in
-                guard let words = wordsFromApi else { return }
-                self.listOfWords = words.map { $0.title }
-                guard !self.listOfWords.isEmpty, self.listOfWords != [] else {
-                    DispatchQueue.main.async {
-                        guard let navigation = self.navigationController else { return }
-                        let resultVC = ResultViewController()
-                        resultVC.resultLabel.text = "В категории пока нет слов. \n Выберите другую"
-                        resultVC.scoreLabel.text = "Счет: \(self.scoreAfterWin)"
-                        resultVC.homeButton.isHidden = true
-                        navigation.pushViewController(resultVC, animated: false)
-                    }
-                    return }
-                DispatchQueue.main.async {
-                    self.newRound()
-                }
-            }
+            loadlistOfWordsData()
         }
         newRound()
+    }
+    
+    func loadlistOfWordsData() {
+        networkService.loadWords(for: categoryWords) { wordsFromApi in
+            guard let words = wordsFromApi else { return }
+            self.listOfWords = words.map { $0.title }
+            guard !self.listOfWords.isEmpty, self.listOfWords != [] else {
+                DispatchQueue.main.async {
+                    guard let navigation = self.navigationController else { return }
+                    let resultVC = ResultViewController()
+                    resultVC.resultLabel.text = "В категории пока нет слов. \n Выберите другую"
+                    resultVC.scoreLabel.text = "Счет: \(self.scoreAfterWin)"
+                    resultVC.homeButton.isHidden = true
+                    navigation.pushViewController(resultVC, animated: false)
+                }
+                return }
+            DispatchQueue.main.async {
+                self.newRound()
+            }
+        }
     }
     
     /// Run new round when u choose category
